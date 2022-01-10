@@ -26,7 +26,7 @@ const removeTransaction = ID => {
 
 const addTransactionIntoDOM = transaction => {
 
-    const operator = transaction.amount < 0 ? '-' : '+' // If the value is less than 0, then it has the sign '-' and negative, else value it becomes positive.
+    const operator = transaction.amount <= 0 ? '-' : '+' // If the value is less than 0, then it has the sign '-' and negative, else value it becomes positive.
     const CSSClass = transaction.amount < 0 ? 'minus' : 'plus' // If the value is less than 0, the class is minus, else the class is plus.
     const amountWithoutOperator = Math.abs(transaction.amount) // Removing sign '-' or '+'
     const amountWithoutOperatorFormated = formaterBRL.format(amountWithoutOperator)
@@ -66,6 +66,20 @@ const formaterBRL = new Intl.NumberFormat('pt-BR', {
     minimumFractionDigits: '2'
 })
 
+const colorBalanceNegative = () => {
+
+    const transactionsAmounts = transactions.map(({ amount }) => amount)
+
+    const checkedNegative = getTotal(transactionsAmounts)
+    const negativeValueBalance = Math.sign(checkedNegative)
+
+    if(negativeValueBalance === -1) {
+        document.getElementById('balance').style.color = 'red'
+    } else {
+        document.getElementById('balance').style.color = '#2e75cc'
+    }
+}
+
 const updateBalanceValue = () => {
     const transactionsAmounts = transactions.map(({ amount }) => amount) // Creating a "map" in "transaction", for search only "amount" in the array
 
@@ -76,7 +90,12 @@ const updateBalanceValue = () => {
     balanceDisplay.textContent = ` ${total}`
     incomeDisplay.textContent = ` ${income}`
     expenseDisplay.textContent = ` ${expense}`
+
+    
+    colorBalanceNegative()
 }
+
+
 
 const init = () => {
     transactionsUl.innerHTML = ''
