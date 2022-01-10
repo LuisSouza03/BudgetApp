@@ -37,14 +37,14 @@
       <form id="form">
         <div class="form-control">
           <label for="text">Name</label>
-          <input autofocus type="text" id="text" placeholder="Name of Transaction" />
+          <input autofocus type="text" id="text" maxlength="20" autocomplete="off" placeholder="Name of Transaction" />
         </div>
 
         <div class="form-control">
           <label for="amount">Value <br />
-            <small>(negative - expenses, positive - recipes)</small>
+            <small>Negative - expenses: (ex: -293.42) <br> Positive - recipes: (ex: 293.42)</small>
           </label>
-          <input type="number" step="any" id="amount" placeholder="Value of Transaction | ex: 1500,49" />
+          <input type="number" step="any" id="amount" autocomplete="off" placeholder="Value of Transaction" />
         </div>
 
         <button class="btn">Add</button>

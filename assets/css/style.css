@@ -123,14 +123,15 @@ input[type='number'] {
   position: relative;
   padding: 10px;
   margin: 10px 0;
+  border-radius: 15px;
 }
 
 .transactions li.plus {
-  border-right: 5px solid #2ecc71;
+  border-right: 7px solid #2ecc71;
 }
 
 .transactions li.minus {
-  border-right: 5px solid #c0392b;
+  border-right: 7px solid #c0392b;
 }
 
 .delete-btn {

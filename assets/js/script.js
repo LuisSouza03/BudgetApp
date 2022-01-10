@@ -5,6 +5,7 @@ const balanceDisplay = document.querySelector('#balance')
 const form = document.querySelector('#form');
 const inputTransactionName = document.querySelector('#text');
 const inputTransactionAmount = document.querySelector('#amount')
+const graphicSet = document.querySelector('#teste-graphic')
 
 const LocalStorageTransactions = JSON.parse(localStorage.
     getItem('transactions'))
@@ -21,6 +22,7 @@ const removeTransaction = ID => {
     updateLocalStorage();
     init();
 }
+
 
 const addTransactionIntoDOM = transaction => {
 
@@ -127,4 +129,3 @@ const handleFormSubmit = event => {
 }
 
 form.addEventListener('submit', handleFormSubmit)
-
