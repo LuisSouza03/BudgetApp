@@ -27,12 +27,13 @@ const addTransactionIntoDOM = transaction => {
     const operator = transaction.amount < 0 ? '-' : '+' // If the value is less than 0, then it has the sign '-' and negative, else value it becomes positive.
     const CSSClass = transaction.amount < 0 ? 'minus' : 'plus' // If the value is less than 0, the class is minus, else the class is plus.
     const amountWithoutOperator = Math.abs(transaction.amount) // Removing sign '-' or '+'
+    const amountWithoutOperatorFormated = formaterBRL.format(amountWithoutOperator)
 
     const li = document.createElement('li') // Creating a new element in HTML
 
     li.classList.add(CSSClass) // Adding a new class for Li
     li.innerHTML = `
-        ${transaction.name} <span> ${operator} R$ ${amountWithoutOperator} 
+        ${transaction.name} <span> ${operator} ${amountWithoutOperatorFormated} 
         </span>
         <button class="delete-btn" onClick = "removeTransaction(${transaction.id})">
             x
@@ -57,16 +58,22 @@ const getTotal = transactionsAmounts => transactionsAmounts
     .reduce((acumulator, transaction) => acumulator + transaction, 0)
     .toFixed(2)
 
+const formaterBRL = new Intl.NumberFormat('pt-BR', {
+    style: 'currency',
+    currency: 'BRL',
+    minimumFractionDigits: '2'
+})
+
 const updateBalanceValue = () => {
     const transactionsAmounts = transactions.map(({ amount }) => amount) // Creating a "map" in "transaction", for search only "amount" in the array
 
-    const total = getTotal(transactionsAmounts);
-    const income = getIncome(transactionsAmounts);
-    const expense = getExpenses(transactionsAmounts);
+    const total = formaterBRL.format(getTotal(transactionsAmounts));
+    const income = formaterBRL.format(getIncome(transactionsAmounts));
+    const expense = formaterBRL.format(getExpenses(transactionsAmounts));
 
-    balanceDisplay.textContent = `R$ ${total}`
-    incomeDisplay.textContent = `R$ ${income}`
-    expenseDisplay.textContent = `R$ ${expense}`
+    balanceDisplay.textContent = ` ${total}`
+    incomeDisplay.textContent = ` ${income}`
+    expenseDisplay.textContent = ` ${expense}`
 }
 
 const init = () => {

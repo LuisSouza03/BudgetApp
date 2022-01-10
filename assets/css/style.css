@@ -111,7 +111,7 @@ input[type='number'] {
   padding: 0;
   margin-bottom: 40px;
   max-height: 200px;
-  overflow-y: scroll;
+  overflow: auto;
 }
 
 .transactions li {
@@ -151,4 +151,9 @@ input[type='number'] {
 
 .transactions li:hover .delete-btn {
   opacity: 1;
+}
+
+.transactions li:hover {
+  margin-left: 20px;
+  transition: 0.2s ease-in;
 }
